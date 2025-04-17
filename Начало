@@ -1,0 +1,72 @@
+import pygame
+import random
+import copy
+
+pygame.init()
+
+# количество столбцов сетки
+columns = 11
+# количество строк сетки
+strings = 21
+
+# ширина окна игры
+screen_x = 250
+# высота окна игры
+screen_y = 500
+
+screen = pygame.display.set_mode((screen_x, screen_y))
+# устанавливаем заголовок окна
+pygame.display.set_caption("project Tetris")
+# создаём объект для отслеживания времени
+clock = pygame.time.Clock()
+
+# ширина одной ячейки сетки
+cell_x = screen_x / (columns - 1)
+# высота одной ячейки сетки
+cell_y = screen_y / (strings - 1)
+
+fps = 60
+
+grid = []
+
+for i in range(columns):
+    grid.append([])
+  for j in range(strings):
+       grid[i].append([1])
+
+for i in range(columns):
+   for j in range(strings):
+       grid[i][j].append(pygame.Rect(i * cell_x, j * cell_y, cell_x, cell_y))
+       grid[i][j].append(pygame.Color("Red"))
+
+# описание фигур Тетриса
+details = 
+[
+   # линия
+   [[-2, 0], [-1, 0], [0, 0], [1, 0]],
+   # L-образная
+   [[-1, 1], [-1, 0], [0, 0], [1, 0]],
+   # обратная L-образная
+   [[1, 1], [-1, 0], [0, 0], [1, 0]],
+   # квадрат
+   [[-1, 1], [0, 1], [0, 0], [-1, 0]],
+   # Z-образная
+   [[1, 0], [1, 1], [0, 0], [-1, 0]],
+   # обратная Z-образная
+   [[0, 1], [-1, 0], [0, 0], [1, 0]],
+   # T-образная
+   [[-1, 1], [0, 1], [0, 0], [1, 0]],
+]
+
+#список для хранения всех 7 фигур
+det = [[], [], [], [], [], [], []]
+
+for i in range(len(details)):
+   for j in range(4):
+       det[i].append(pygame.Rect(details[i][j][0] * cell_x + cell_x * (columns // 2), details[i][j][1] * cell_y, cell_x, cell_y))
+
+detail = pygame.Rect(0, 0, cell_x, cell_y)
+det_choice = copy.deepcopy(random.choice(det))
+count = 0
+game = True
+rotate = False
