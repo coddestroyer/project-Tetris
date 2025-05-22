@@ -406,7 +406,7 @@ def drawInfo(points, level):
     levelRect.topleft = (window_w - 550, 250)
     display_surf.blit(levelSurf, levelRect)
 
-    pausebSurf = basic_font.render('Пауза: пробил', True, info_color)
+    pausebSurf = basic_font.render('Пауза: пробел/space', True, info_color)
     pausebRect = pausebSurf.get_rect()
     pausebRect.topleft = (window_w - 550, 420)
     display_surf.blit(pausebSurf, pausebRect)
